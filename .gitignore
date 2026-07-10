@@ -6,9 +6,12 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Logs locais (mantemos o histórico versionado em logs/published.csv,
-# mas ignoramos rascunhos temporários de execução)
-posts/queue/*.tmp.md
+# Conteúdo de posts (rascunhos e histórico) nunca vai pro GitHub —
+# fica só local. Mantém a pasta versionada via .gitkeep.
+posts/queue/*.md
+!posts/queue/.gitkeep
+posts/queue/images/
+logs/published.csv
 *.log
 
 # Credenciais / sessões de navegador (nunca versionar)
