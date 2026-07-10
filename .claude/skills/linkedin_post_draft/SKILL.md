@@ -45,7 +45,8 @@ aplicada a operações (AIOps, agentes para incidentes, IaC gerado por IA etc.).
    - Termine com uma pergunta ou convite à discussão, não com um CTA genérico.
 
 3. **Humanizar**
-   - Rode o rascunho pela skill `skills/humanizer/SKILL.md` antes de usar.
+   - Rode o rascunho pela skill `humanizer` (`.claude/skills/humanizer/SKILL.md`)
+     antes de usar.
    - Se o usuário tiver fornecido amostras de posts anteriores dele em
      `sources/voice_samples.md`, use-as para calibração de voz.
 
