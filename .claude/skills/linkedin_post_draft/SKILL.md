@@ -4,7 +4,10 @@ description: |
   Gera e preenche um post no LinkedIn sobre um tema atual de SRE, DevOps,
   Engenharia de Plataforma ou IA aplicada a operações. Escreve o texto
   direto no campo de post do LinkedIn via Chrome, mas NUNCA clica em
-  publicar — a confirmação final é sempre manual, do usuário.
+  publicar — a confirmação final é sempre manual, do usuário. Também
+  atende ao pedido de "preencher o próximo rascunho no LinkedIn" /
+  "postar o próximo rascunho", que pega um rascunho já gerado (por essa
+  skill local ou pela rotina agendada na nuvem) e só faz o preenchimento.
 compatibility: any-agent
 ---
 
@@ -13,6 +16,14 @@ compatibility: any-agent
 Você ajuda um Senior DevOps Engineer a manter presença ativa no LinkedIn,
 publicando ~3x por semana sobre SRE, DevOps, Engenharia de Plataforma e IA
 aplicada a operações (AIOps, agentes para incidentes, IaC gerado por IA etc.).
+
+## Um repositório só
+
+Código, skills e conteúdo de post (`posts/queue/*.md`, `posts/queue/images/`,
+`logs/published.csv`) vivem todos neste mesmo repositório
+(`linkedin-post-agent`), que é **público**. O usuário está ciente e topou
+que os rascunhos fiquem visíveis no histórico do Git (decisão de
+2026-07-10) — não pergunte de novo por causa disso.
 
 ## Guardrail crítico (não negociável)
 
@@ -24,7 +35,9 @@ aplicada a operações (AIOps, agentes para incidentes, IaC gerado por IA etc.).
 - Não curta, comente, siga ou conecte com ninguém durante essa skill — o
   escopo é só a criação do post do próprio usuário.
 
-## Passo a passo
+## Modo A — Gerar um rascunho novo
+
+Use quando não há rascunho pendente, ou o usuário pede um tema específico.
 
 1. **Escolher o tema**
    - Leia `sources/sources.md` para a lista de fontes.
@@ -66,55 +79,75 @@ aplicada a operações (AIOps, agentes para incidentes, IaC gerado por IA etc.).
 
 4. **Salvar o rascunho**
    - Grave o texto final em `posts/queue/YYYY-MM-DD-tema.md` antes de abrir
-     o navegador (assim nada se perde se algo falhar no meio do caminho).
+     o navegador.
+   - Imagem de capa (sempre buscar, sem perguntar): se não houver imagem
+     própria relevante em `sources/`, busque uma imagem genérica de banco
+     de licença livre (Unsplash/Pexels, sem exigência de atribuição) e
+     baixe pra `posts/queue/images/YYYY-MM-DD-tema.jpg`. Não precisa
+     perguntar — já autorizado permanentemente (2026-07-10). Nunca baixe
+     de blog/empresa terceira sem licença clara (aí sim precisa
+     perguntar). Se não achar nada relevante, siga sem imagem.
+   - Adicione a linha em `logs/published.csv` com `status=draft`.
+   - `git add`, `git commit`, `git push`.
 
-5. **Imagem de capa (sempre buscar, sem perguntar)**
-   - Prefira imagem própria do usuário quando existir uma relevante em
-     `sources/`.
-   - Caso contrário, busque automaticamente uma imagem genérica relacionada
-     ao tema em banco de imagem de licença livre (Unsplash/Pexels, licença
-     sem exigência de atribuição). Não é necessário perguntar ao usuário
-     antes de baixar imagens de banco livre para esse fim — ele já
-     autorizou esse fluxo de forma permanente (2026-07-10). Baixe direto.
-   - Nunca baixe/reuse diagramas ou fotos proprietárias de blogs/empresas
-     de terceiros sem licença clara de reuso — isso continua exigindo
-     confirmação explícita do usuário, dado o risco de violação de
-     direitos autorais em post público. A autorização automática vale só
-     para banco de imagem de licença livre.
-   - Baixe a imagem para `~/Downloads/linkedin-posts/YYYY-MM-DD-tema.jpg`
-     (criar a pasta se não existir) — nunca para dentro do repo. Esse
-     caminho fixo facilita o usuário achar e anexar a imagem manualmente no
-     LinkedIn, já que o upload de arquivo abre um diálogo nativo do SO que
-     a automação do Chrome não consegue preencher sozinha.
-   - Se a busca não achar nada minimamente relevante, siga sem imagem em
-     vez de forçar algo genérico demais.
+5. Siga direto para **"Preencher no LinkedIn"** abaixo.
 
-6. **Preencher no LinkedIn via Chrome**
-   - Abra `linkedin.com/feed`.
-   - Clique em "Começar publicação" / "Start a post".
-   - Digite o texto final no campo (digitação simulada, não colar via
-     clipboard), incluindo a citação da fonte e as hashtags no final.
-   - Se o LinkedIn gerar automaticamente um card de link a partir de algum
-     texto/URL da citação da fonte, remova o card (ele costuma linkar pra
-     home do site, não pro artigo específico) — deixe só o texto.
-   - Se houver imagem baixada: **não tente clicar no ícone de foto/anexar
-     mais de uma vez.** Esse botão abre um diálogo nativo do SO que a
-     automação do Chrome não consegue enxergar nem preencher — tentar de
-     novo (ou checar `input[type=file]` via JS) não resolve, só reabre o
-     diálogo e trava a automação. Tente no máximo 1 vez para confirmar que
-     não há um input acessível; se não houver, desista imediatamente e só
-     informe o caminho do arquivo em `~/Downloads/linkedin-posts/` pro
-     usuário anexar manualmente.
-   - **Pare aqui.** Não clique em "Publicar".
+## Modo B — Preencher o próximo rascunho pendente
 
-7. **Avisar o usuário**
-   - Mensagem final: "Post preenchido no LinkedIn, aba aberta. Revise e
-     clique em Publicar quando quiser."
-   - Registre em `logs/published.csv` a linha do post como `status=draft`;
-     o usuário (ou uma execução futura) atualiza para `status=published`
-     depois de conferir manualmente.
+Gatilhos em linguagem natural: "preenche o próximo rascunho no LinkedIn",
+"posta o próximo rascunho", "roda o fluxo de postar". Use quando já existe
+rascunho pronto (gerado pela rotina na nuvem ou por uma execução anterior
+do Modo A) esperando ser preenchido no navegador.
+
+1. `git pull`.
+2. Leia `logs/published.csv`, ache a linha mais antiga com `status=draft`.
+   Se não houver nenhuma, avise o usuário e ofereça rodar o Modo A.
+3. Abra o `.md` correspondente em `posts/queue/`.
+4. **Revise antes de preencher** — mesmo critérios do Modo A: sem
+   experiência pessoal inventada, estrutura em parágrafos curtos, citação
+   da fonte, até 3 hashtags. Se algo estiver fora do padrão (ex: a rotina
+   na nuvem gerou algo que quebra alguma dessas regras), corrija o
+   arquivo, `git commit` + `git push` a correção antes de preencher.
+5. Confira se existe imagem em `posts/queue/images/` pro mesmo tema, ou em
+   `~/Downloads/linkedin-posts/` (caso tenha sido gerada numa execução
+   local anterior).
+6. Siga para **"Preencher no LinkedIn"** abaixo.
+7. Depois de preencher, atualize `status=draft` para `status=filled` na
+   linha correspondente de `logs/published.csv`, `git commit` + `git push`.
+   (O usuário ainda decide se publica; `filled` só indica "já preenchido
+   no LinkedIn, aguardando revisão humana".)
+
+## Preencher no LinkedIn via Chrome
+
+- Abra `linkedin.com/feed`.
+- Clique em "Começar publicação" / "Start a post".
+- Digite o texto final no campo (digitação simulada, não colar via
+  clipboard), incluindo a citação da fonte e as hashtags no final.
+- Se o LinkedIn gerar automaticamente um card de link a partir de algum
+  texto/URL da citação da fonte, remova o card (ele costuma linkar pra
+  home do site, não pro artigo específico) — deixe só o texto.
+- Se houver imagem (em `posts/queue/images/` ou em
+  `~/Downloads/linkedin-posts/`): **não tente clicar no ícone de
+  foto/anexar mais de uma vez.** Esse botão abre um diálogo nativo do SO
+  que a automação do Chrome não consegue enxergar nem preencher — tentar
+  de novo não resolve, só reabre o diálogo e trava a automação. Tente no
+  máximo 1 vez para confirmar que não há um input acessível; se não
+  houver, desista imediatamente e só informe o caminho do arquivo pro
+  usuário anexar manualmente.
+- **Pare aqui.** Não clique em "Publicar".
+
+## Avisar o usuário
+
+Mensagem final: "Post preenchido no LinkedIn, aba aberta. Revise e clique
+em Publicar quando quiser." Inclua o caminho da imagem, se houver, pra
+anexar manualmente.
 
 ## Cadência
 
-Pensado para rodar até 3x por semana (ex: segunda, quarta, sexta). Não
-execute mais de uma vez no mesmo dia sem pedido explícito do usuário.
+Geração de rascunho (Modo A) pensada pra até 3x por semana (ex: segunda,
+quarta, sexta) — também coberta pela rotina agendada na nuvem
+(`claude.ai/code/routines`, trigger "LinkedIn post draft - SRE/DevOps/AIOps"),
+que já roda nesses dias sozinha e deixa o rascunho pronto no repo. Não
+execute o Modo A mais de uma vez no mesmo dia sem pedido explícito do
+usuário. O Modo B (preencher) pode ser pedido a qualquer momento, sem
+limite de frequência — é só preenchimento, não geração.

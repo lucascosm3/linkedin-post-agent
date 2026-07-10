@@ -18,7 +18,6 @@
       "Bash(mkdir -p ~/Downloads/linkedin-posts)",
       "Bash(curl -sL https://images.unsplash.com/*)",
       "Bash(cp * ~/Downloads/linkedin-posts/*)",
-      "Bash(cp * linkedin-post-agent-drafts/*)",
       "Bash(git status*)",
       "Bash(git diff*)",
       "Bash(git log*)",
