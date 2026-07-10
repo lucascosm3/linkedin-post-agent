@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:hn.algolia.com)",
+      "WebFetch(domain:platformengineering.com)",
+      "WebFetch(domain:unsplash.com)",
+      "WebFetch(domain:images.unsplash.com)",
+      "WebFetch(domain:github.com)",
+      "Edit",
+      "Write",
+      "Bash(mkdir -p ~/Downloads/linkedin-posts)",
+      "Bash(curl -sL https://images.unsplash.com/*)",
+      "Bash(cp * ~/Downloads/linkedin-posts/*)",
+      "Read(//home/lucas/Downloads/linkedin-posts/**)",
+      "Skill(humanizer)",
+      "Skill(linkedin_post_draft)",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "mcp__claude-in-chrome__tabs_create_mcp",
+      "mcp__claude-in-chrome__navigate",
+      "mcp__claude-in-chrome__computer",
+      "mcp__claude-in-chrome__find",
+      "mcp__claude-in-chrome__read_page",
+      "mcp__claude-in-chrome__javascript_tool"
+    ]
+  }
+}
