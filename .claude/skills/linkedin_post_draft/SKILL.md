@@ -41,6 +41,12 @@ aplicada a operações (AIOps, agentes para incidentes, IaC gerado por IA etc.).
      HashiCorp Vault, migrações de Ingress Nginx→Traefik, builds ARM64/Graviton.
    - Conecte o tema do dia com essa vivência sempre que fizer sentido —
      não é obrigatório forçar em todo post.
+   - **Nunca invente uma experiência pessoal específica não confirmada**
+     (ex: "isso bateu numa auditoria que fiz ano passado", "vi isso quebrar
+     num cluster meu"). Falar em termos gerais ("é comum ver isso em
+     clusters que...", "muita gente configura errado por padrão...") é
+     aceitável; alegar um caso pessoal concreto que não foi verificado com
+     o usuário não é — pode ser inverdade e mina a credibilidade do post.
    - Estruture em parágrafos curtos (2-4 linhas cada), com quebra de linha
      dupla entre eles, pra ficar escaneável no feed do LinkedIn.
    - Termine com uma pergunta ou convite à discussão, não com um CTA genérico.
