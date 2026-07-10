@@ -12,7 +12,6 @@
       "Bash(mkdir -p ~/Downloads/linkedin-posts)",
       "Bash(curl -sL https://images.unsplash.com/*)",
       "Bash(cp * ~/Downloads/linkedin-posts/*)",
-      "Read(//home/lucas/Downloads/linkedin-posts/**)",
       "Skill(humanizer)",
       "Skill(linkedin_post_draft)",
       "mcp__claude-in-chrome__tabs_context_mcp",
