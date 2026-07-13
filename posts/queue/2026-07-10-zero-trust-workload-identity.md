@@ -12,3 +12,6 @@ O problema de sempre: service account token ou certificado hardcoded no Secret, 
 Cilium entrando no meio pra fazer enforcement de rede baseado nessa identidade (não só IP ou namespace) resolve outro ponto que sempre foi frágil pra mim: policy de rede sobrevive a um pod sendo recriado com IP novo, porque a identidade não muda.
 
 Já alguém migrou uma malha inteira pra esse modelo em produção? Quero saber quanto tempo levou e o que quebrou no meio do caminho.
+
+Fonte: How to Implement Zero-Trust Workload Identity in Kubernetes with SPIFFE, SPIRE, and Cilium — https://www.freecodecamp.org/news/implement-zero-trust-workload-identity-in-kubernetes-with-spiffe-spire-and-cilium/
+#Kubernetes #ZeroTrust #PlatformEngineering
