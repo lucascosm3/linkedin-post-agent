@@ -1,5 +1,5 @@
 date,topic,source,status,file
-2026-07-10,Zero-Trust Workload Identity em Kubernetes com SPIFFE/SPIRE/Cilium,https://www.freecodecamp.org/news/implement-zero-trust-workload-identity-in-kubernetes-with-spiffe-spire-and-cilium/,draft,posts/queue/2026-07-10-zero-trust-workload-identity.md
+2026-07-10,Zero-Trust Workload Identity em Kubernetes com SPIFFE/SPIRE/Cilium,https://www.freecodecamp.org/news/implement-zero-trust-workload-identity-in-kubernetes-with-spiffe-spire-and-cilium/,filled,posts/queue/2026-07-10-zero-trust-workload-identity.md
 2026-07-10,Governança de custo e acesso de LLM como camada de control plane,https://platformengineering.com/features/platform-engineering-2-0-manage-ai-costs-and-risks-without-rebuilding-infrastructure/,filled,posts/queue/2026-07-10-ai-cost-governance-control-plane.md
 2026-07-10,Vulnerabilidade crítica no ArgoCD (CVSS 9.6) - vazamento de Secret via ServerSideDiff,https://github.com/argoproj/argo-cd/security/advisories/GHSA-3v3m-wc6v-x4x3,filled,posts/queue/2026-07-10-argocd-serversidediff-secret-leak.md
 2026-07-10,RCE não autenticada no repo-server do Argo CD sem patch há 18 meses,https://thehackernews.com/2026/07/unpatched-argo-cd-repo-server-flaw.html,filled,posts/queue/2026-07-10-argocd-repo-server-rce.md
