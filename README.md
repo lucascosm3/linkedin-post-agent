@@ -41,10 +41,12 @@ ajustes de rota fazem parte do histórico de commits de propósito.
 ## ⚙️ Como funciona
 
 1. 🔎 A skill `linkedin_post_draft` (`.claude/skills/linkedin_post_draft/SKILL.md`)
-   escolhe um tema atual a partir das fontes em `sources/sources.md`
-   (Hacker News filtrado, SRE Weekly, The New Stack, awesome-ai-sre etc.),
-   evitando repetir assunto das últimas 2 semanas (`logs/published.csv`).
-2. ✍️ Gera um rascunho conectando o tema com vivência real em AWS/EKS,
+   levanta de 3 a 5 temas atuais candidatos a partir das fontes em
+   `sources/sources.md` (Hacker News filtrado, SRE Weekly, The New Stack,
+   awesome-ai-sre etc.), evitando repetir assunto das últimas 2 semanas
+   (`logs/published.csv`), e **pergunta ao usuário qual dos candidatos vira
+   o post** antes de escrever qualquer rascunho.
+2. ✍️ Gera um rascunho conectando o tema escolhido com vivência real em AWS/EKS,
    Terraform, ArgoCD, GitLab CI, Vault etc., estruturado em parágrafos
    curtos e fechado com citação da fonte e até 3 hashtags.
 3. 🧹 Passa o texto pela skill `humanizer`
@@ -91,7 +93,7 @@ Dois modos, em linguagem natural:
 
 | Modo | Como pedir | O que faz |
 |---|---|---|
-| 🆕 **Gerar rascunho** | "roda a skill do LinkedIn" (ou peça um tema específico) | Escolhe tema, escreve, humaniza, busca imagem, salva e commita |
+| 🆕 **Gerar rascunho** | "roda a skill do LinkedIn" (ou peça um tema específico) | Levanta candidatos, pergunta qual tema você quer, escreve, humaniza, busca imagem, salva e commita |
 | 📤 **Preencher rascunho pronto** | "preenche o próximo rascunho no LinkedIn" / "posta o próximo rascunho" | `git pull`, pega a entrada mais antiga com `status=draft`, revisa contra o padrão da skill e preenche no navegador |
 
 ---

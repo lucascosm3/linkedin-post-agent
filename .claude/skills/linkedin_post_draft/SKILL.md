@@ -2,12 +2,14 @@
 name: linkedin_post_draft
 description: |
   Gera e preenche um post no LinkedIn sobre um tema atual de SRE, DevOps,
-  Engenharia de Plataforma ou IA aplicada a operações. Escreve o texto
-  direto no campo de post do LinkedIn via Chrome, mas NUNCA clica em
-  publicar — a confirmação final é sempre manual, do usuário. Também
-  atende ao pedido de "preencher o próximo rascunho no LinkedIn" /
-  "postar o próximo rascunho", que pega um rascunho já gerado (por essa
-  skill local ou pela rotina agendada na nuvem) e só faz o preenchimento.
+  Engenharia de Plataforma ou IA aplicada a operações. Levanta algumas
+  notícias/temas candidatos do dia e deixa o usuário escolher qual vira o
+  post antes de escrever o rascunho. Escreve o texto direto no campo de
+  post do LinkedIn via Chrome, mas NUNCA clica em publicar — a
+  confirmação final é sempre manual, do usuário. Também atende ao pedido
+  de "preencher o próximo rascunho no LinkedIn" / "postar o próximo
+  rascunho", que pega um rascunho já gerado (por essa skill local ou pela
+  rotina agendada na nuvem) e só faz o preenchimento.
 compatibility: any-agent
 ---
 
@@ -45,8 +47,14 @@ Use quando não há rascunho pendente, ou o usuário pede um tema específico.
      sugeridos, e/ou peça ao usuário um tema específico se ele já tiver um.
    - Confira `logs/published.csv` para não repetir assunto das últimas 2
      semanas.
-   - Escolha 1 tema com ângulo claro (ferramenta, decisão técnica, dado
-     concreto) — evite "hoje vou falar sobre Kubernetes" genérico.
+   - Levante de 3 a 5 notícias/temas candidatos do dia, cada um com ângulo
+     claro (ferramenta, decisão técnica, dado concreto) — evite "hoje vou
+     falar sobre Kubernetes" genérico.
+   - **Apresente as opções ao usuário e espere ele escolher** antes de
+     escrever o rascunho — não escolha sozinho. Liste título curto + fonte
+     de cada candidato (ex: uma lista numerada) para ele bater o olho e
+     responder com o número/tema desejado. Só pule essa pergunta se o
+     usuário já tiver pedido um tema específico de antemão.
 
 2. **Rascunhar o post**
    - Escreva 1 rascunho curto (120–220 palavras), no tom de Senior DevOps
